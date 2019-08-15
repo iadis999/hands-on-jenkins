@@ -100,8 +100,10 @@ def approve() {
 
 
 def runUnittests() {
-	sh "pip3 install --no-cache-dir -r ./section_4/code/cd_pipeline/requirements.txt"
-	sh "python3 section_4/code/cd_pipeline/tests/test_flask_app.py"
+	withDockerContainer(image: 'python:3.6', args:'-u root:root'){
+		sh "pip3 install --no-cache-dir -r ./section_4/code/cd_pipeline/requirements.txt"
+		sh "python3 section_4/code/cd_pipeline/tests/test_flask_app.py"
+	}
 }
 
 
